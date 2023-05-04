@@ -15,16 +15,14 @@ GPIO.output(G,1)
 GPIO.output(B,1)
 try:
     while True:
-        request = input("Enter RGB Hex: ")
+        request = input("Enter RGB Hex (ex '#FF00A7' or 'FF00A7'): ")
+        request = request.strip('\n#')
+        if len(request) == 6:
+            red = hex(request[0,1])
+            green = hex(request[2,3])
+            blue = hex(request[4,5])
+            print(red+green+blue)
 except KeyboardInterrupt:
     GPIO.output(R,0)
     GPIO.output(G,0)
     GPIO.output(B,0)
-
-
-('''
-        if len(request) == 3:
-            GPIO.output(R,int(request[0]))
-            GPIO.output(G,int(request[1]))
-            GPIO.output(B,int(request[2]))
-            ''')
