@@ -22,3 +22,4 @@ try:
             GPIO.output(B,int(request[2]))
 except KeyboardInterrupt:
     GPIO.cleanup()
+    
