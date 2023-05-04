@@ -17,8 +17,10 @@ try:
     while True:
         request = input("Enter RGB Hex (ex '#FF00A7' or 'FF00A7'): ")
         request = request.strip('\n#')
-        R, G, B = list(request[i:i+2] for i in 6)
-        print(R+G+B)
+        R = request[0,2]
+        G = request[2,4]
+        B = request[4,6]
+        print(R,G,B)
         ('''if len(request) == 6:
             R, G, B = tuple(hex(request[i:i+2], 16) for i in (0, 2, 4))
             print(R+G+B)''')
