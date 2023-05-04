@@ -18,10 +18,8 @@ try:
         request = input("Enter RGB Hex (ex '#FF00A7' or 'FF00A7'): ")
         request = request.strip('\n#')
         if len(request) == 6:
-            red = hex(request[0,1])
-            green = hex(request[2,3])
-            blue = hex(request[4,5])
-            print(red+green+blue)
+            R, G, B = tuple(int(request[i:i+2], 16) for i in (0, 2, 4))
+            print(R+G+B)
 except KeyboardInterrupt:
     GPIO.output(R,0)
     GPIO.output(G,0)
