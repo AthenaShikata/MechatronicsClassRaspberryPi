@@ -1,9 +1,14 @@
 import requests
-#first parameter of the 'get' method is the 'url':
-url = 'https://www.swimmingrank.com/cal/strokes/strokes_pc/EEVHAAPFE_meets.html'
-# url = 'https://www.steamclown.org/projects/red_pill.txt'
-x = requests.get(url)
-#print the response text (the content of the requested file):
-print(x.text)
-print('')
-print(x.find('Latest Meets'))
+
+#Enter a url to find the title of the web page
+url = 'https://steamclown.org/'
+try:
+    x = requests.get(url)
+except:
+    raise TyperError('URL Not Able To Connect')
+text = x.text
+
+titleStart = 7 + int(text.find('<title>'))
+titleEnd = text.find('</title>')
+
+print(text[titleStart:titleEnd])
