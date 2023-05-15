@@ -33,7 +33,10 @@ try:
                 blue_pwm.ChangeDutyCycle(blue)
             except:
                 print('Value Not Hexadecimal. Please Enter A Hexadecimal Color Code')
+        else :
+            print('Value Not Hexadecimal. Please Enter A Hexadecimal Color Code')
 except KeyboardInterrupt:
+    print('Closing Program')
     red_pwm.stop()
     green_pwm.stop()
     blue_pwm.stop()
