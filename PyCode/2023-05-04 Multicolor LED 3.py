@@ -18,14 +18,18 @@ try:
         request = input("Enter RGB Hex (ex '#FF00A7' or 'FF00A7'): ")
         request = request.strip('\n#')
         if len(request) == 6:
-            red = request[0,2]
-            green = request[2,4]
-            blue = request[4,6]
-            print(R,G,B)
-            GPIO.output(R,int(red))
-            GPIO.output(G,int(green))
-            GPIO.output(B,int(blue))
+            try:
+                red = int(request[0:2],16)
+                green = int(request[2:4],16)
+                blue = int(request[4:6],16)
+                print(red,green,blue)
+                GPIO.output(R,red)
+                GPIO.output(G,green)
+                GPIO.output(B,blue)
+            except:
+                raise TypeError('Value Not Hexadecimal')
 except KeyboardInterrupt:
     GPIO.output(R,0)
     GPIO.output(G,0)
     GPIO.output(B,0)
+    pass
