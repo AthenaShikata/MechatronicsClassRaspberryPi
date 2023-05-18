@@ -19,16 +19,21 @@ urls = {'Mr. Burnham':'http://10.178.200.149',
 'Kenny':'http://10.178.202.65',
 'Brian N':'http://10.178.203.128/'}
 
+robot_names = {}
+
 def url_ok(url):
     try:
         response = requests.head(url)
     except Exception as e:
-        return "NOT OK: Website Not Found"
+        print("NOT OK: Website Not Found")
+        return 'bad'
     else:
         if response.status_code == 200:
-            return "OK: Website Found"
+            print("OK: Website Found")
+            return 'good'
         else:
-            return "NOT OK: Other Error"
+            print("NOT OK: Other Error")
+            return 'bad'
 
 def get_name(i):
     x = requests.get(urls[i])
@@ -36,7 +41,7 @@ def get_name(i):
     #print(text)
     foundRobotStart = text.find('robot_name = ')
     if foundRobotStart == -1:
-        print('ERROR: No Bot Found')
+        return 'ERROR: No Bot Found'
     else:
         foundStart = foundRobotStart + 13
         foundEnd = text.find('<',foundStart)
@@ -45,40 +50,22 @@ def get_name(i):
         #print(foundEnd)
         #print(text[foundRobotStart],text[foundStart],text[foundEnd])
         found_robot_name = text[foundStart:foundEnd].strip()
-        print(found_robot_name)
+        robot_names[urls[i]]=found_robot_name
+        return found_robot_name
 
 def test(i):
-    print(i)
-    url_check = url_ok(urls[i])
-    print(url_check)
-    if url_check == 'OK':
-        try:
-            x = requests.get(urls[i])
-        except:
-            raise TyperError('URL Not Able To Connect')
-        text = x.text
-        print(text)
-        foundRobotStart = text.find('robot_name = ')
-        foundStart = foundRobotStart + 13
-        foundEnd = text.find('<',foundStart)
-        print(foundRobotStart)
-        print(foundStart)
-        print(foundEnd)
-        print(text[foundRobotStart],text[foundStart],text[foundEnd])
-        found_robot_name = text[foundStart:foundEnd].strip()
-        print(found_robot_name)
+    pass
 
 def main():
-    #test('Brian N')
+    #test('')
     for i in urls:
         print(i,urls[i])
         url_check = url_ok(urls[i])
-        print(url_check)
-        if url_check == 'OK':
-            get_name(i)
+        if url_check == 'good':
+            found_name = get_name(i)
+            print(found_name)
         print('')
-
-
+    print(robot_names)
 
 main()
 
