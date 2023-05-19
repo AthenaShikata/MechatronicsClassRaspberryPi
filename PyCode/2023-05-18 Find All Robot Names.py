@@ -7,14 +7,14 @@ urls = {'Mr. Burnham':'http://10.178.200.149',
 'Landon Phan':'http://10.178.203.140/',
 'Arlette Lopez':'http://10.178.203.124',
 'Nancy Malu Romero':'http://10.178.203.123',
-"Da'Quan B.":'http://10.178.203.44',
+#"Da'Quan B.":'http://10.178.203.44',
 'Thaison N.':'http://10.178.203.2',
-'Aiden V':'http://10.178.202.58/',
-'Jessica Y':'http://10.178.203.83/',
-'Andy H':'http://10.178.202.166/',
+#'Aiden V':'http://10.178.202.58/',
+#'Jessica Y':'http://10.178.203.83/',
+#'Andy H':'http://10.178.202.166/',
 'Loc P':'http://10.178.201.175/',
-'Tyler H':'http://10.178.203.82/',
-'Nguyen V':'http://10.178.202.105/',
+#'Tyler H':'http://10.178.203.82/',
+#'Nguyen V':'http://10.178.202.105/',
 'Hayden M':'http://10.178.203.117',
 'Kenny':'http://10.178.202.65',
 'Brian N':'http://10.178.203.128/'}
@@ -41,7 +41,8 @@ def get_name(i):
     #print(text)
     foundRobotStart = text.find('robot_name = ')
     if foundRobotStart == -1:
-        return 'ERROR: No Bot Found'
+        print('ERROR: No Bot Found')
+        return 'bad'
     else:
         foundStart = foundRobotStart + 13
         foundEnd = text.find('<',foundStart)
@@ -49,8 +50,9 @@ def get_name(i):
         #print(foundStart)
         #print(foundEnd)
         #print(text[foundRobotStart],text[foundStart],text[foundEnd])
-        found_robot_name = text[foundStart:foundEnd].strip()
+        found_robot_name = text[foundStart:foundEnd].strip('<>();\n[:] ')
         robot_names[urls[i]]=found_robot_name
+        print(found_robot_name)
         return found_robot_name
 
 def test(i):
@@ -63,7 +65,8 @@ def main():
         url_check = url_ok(urls[i])
         if url_check == 'good':
             found_name = get_name(i)
-            print(found_name)
+            if found_name != 'bad':
+                pass
         print('')
     print(robot_names)
 
