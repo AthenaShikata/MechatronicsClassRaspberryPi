@@ -54,12 +54,8 @@ def get_name(i):
         robot_names[urls[i]]=found_robot_name
         print(found_robot_name)
         return found_robot_name
-
-def test(i):
-    pass
-
+    
 def main():
-    #test('')
     for i in urls:
         print(i,urls[i])
         url_check = url_ok(urls[i])

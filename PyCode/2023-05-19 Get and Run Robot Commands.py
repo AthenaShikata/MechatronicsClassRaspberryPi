@@ -8,6 +8,19 @@ GPIO.setmode(GPIO.BOARD)
 
 robot_commands = []
 
+R = 32
+G = 33
+B = 35
+PINS = [R,G,B]
+GPIO.setup(PINS, GPIO.OUT, initial=GPIO.LOW)
+red_pwm = GPIO.PWM(R,1000)
+green_pwm = GPIO.PWM(G,1000)
+blue_pwm = GPIO.PWM(B,1000)
+
+red_pwm.start(0)
+green_pwm.start(0)
+blue_pwm.start(0)
+
 def get_commands():
     url_path = 'https://www.steamclown.org/projects/QInlIj_vIHev/Huch_QIn/' 
     url_file = 'all_robots_command_requests.txt'
